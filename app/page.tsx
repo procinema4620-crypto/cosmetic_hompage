@@ -35,7 +35,7 @@ export default function Home() {
                 맑고 깊은 수분,<br />
                 <em>피부의 균형</em>을 되찾다
               </h1>
-              <p className="lead">자극은 덜어내고 촉촉함은 채운 데일리 스킨케어.</p>
+              <p className="lead">자극은 덜어내고 촉촉함은 채운 데일리 스킨케어</p>
               <div className="hero-cta">
                 <Link href="/products" className="btn btn-solid">전체 상품 보기</Link>
                 <Link href="/products/hydra-cloud-cream" className="btn btn-ghost">시그니처 크림</Link>
@@ -62,7 +62,7 @@ export default function Home() {
         <header className="sec-head">
           <div>
             <p className="eyebrow">BEST SELLERS</p>
-            <h2>지금 가장 사랑받는 제품</h2>
+            <h2>지금 인기있는 제품</h2>
           </div>
           <Link href="/products" className="more">전체 보기 →</Link>
         </header>
