@@ -5,10 +5,10 @@ import InquiryForm from "@/components/InquiryForm";
 export const metadata: Metadata = { title: "고객센터" };
 
 const notices = [
-  { tag: "공지", title: "겨울 시즌 택배 지연 안내 (11/20 ~ 12/31)", date: "2026.11.05" },
-  { tag: "공지", title: "개인정보처리방침 개정 안내", date: "2026.10.28" },
-  { tag: "이벤트", title: "신규 가입 웰컴 쿠폰 지급 안내", date: "2026.10.15" },
-  { tag: "안내", title: "추석 연휴 이후 정상 배송 안내", date: "2026.10.02" },
+  { tag: "공지", title: "겨울 시즌 택배 지연 안내 (11/20 ~ 12/31)", date: "2026.11.05", body: "11월 20일부터 12월 31일까지 동계 물량 증가와 기상 악화로 택배 배송이 평소보다 1~2일 지연될 수 있습니다. 주문 시 여유를 두고 신청해 주시면 감사하겠습니다." },
+  { tag: "공지", title: "개인정보처리방침 개정 안내", date: "2026.10.28", body: "개인정보처리방침이 2026년 10월 28일부로 개정되었습니다. 주요 변경 사항은 개인정보 보유 기간 명확화와 위탁 업체 안내 항목 추가입니다. 자세한 내용은 푸터의 개인정보처리방침에서 확인하실 수 있습니다." },
+  { tag: "이벤트", title: "신규 가입 웰컴 쿠폰 지급 안내", date: "2026.10.15", body: "신규 회원가입 시 웰컴 쿠폰이 자동 지급됩니다. 지급된 쿠폰은 마이페이지 > 쿠폰함에서 확인하고 첫 주문 시 사용하실 수 있습니다." },
+  { tag: "안내", title: "추석 연휴 이후 정상 배송 안내", date: "2026.10.02", body: "추석 연휴 기간 중 지연되었던 주문은 연휴 종료 후 순차 출고되어 현재 정상 배송 중입니다. 이용에 불편을 드려 죄송합니다." },
 ];
 
 const faqs = [
@@ -43,7 +43,12 @@ export default function SupportPage() {
         <h2>공지사항</h2>
         <ul className="notice">
           {notices.map((n) => (
-            <li key={n.title}><span className="n-tag">{n.tag}</span><span className="n-title">{n.title}</span><time>{n.date}</time></li>
+            <li key={n.title}>
+              <details>
+                <summary><span className="n-tag">{n.tag}</span><span className="n-title">{n.title}</span><time>{n.date}</time></summary>
+                <p className="n-body">{n.body}</p>
+              </details>
+            </li>
           ))}
         </ul>
       </section>
