@@ -32,7 +32,7 @@ export default function MyPage() {
         </div>
         <div className="my-actions">
           <Link href="/orders" className="btn btn-line">주문배송 조회</Link>
-          <button className="btn btn-line" onClick={() => { logout(); router.push("/"); }}>로그아웃</button>
+          <button className="btn btn-line" onClick={async () => { await logout(); router.push("/"); }}>로그아웃</button>
         </div>
       </section>
 

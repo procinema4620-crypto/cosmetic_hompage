@@ -19,9 +19,14 @@ export default function LoginForm({ next }: { next?: string }) {
     if (ready && user) router.replace(dest);
   }, [ready, user, dest, router]);
 
-  const submit = (e: React.FormEvent) => {
+  const [busy, setBusy] = useState(false);
+
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const r = login(email, pw);
+    if (busy) return;
+    setBusy(true);
+    const r = await login(email, pw);
+    setBusy(false);
     if (!r.ok) return setError(r.error ?? "로그인에 실패했습니다.");
     router.push(dest);
   };
@@ -47,7 +52,7 @@ export default function LoginForm({ next }: { next?: string }) {
           <input type="password" value={pw} onChange={(e) => setPw(e.target.value)} placeholder="비밀번호 입력" autoComplete="current-password" required />
         </label>
         {error && <p className="form-error" role="alert">{error}</p>}
-        <button className="btn btn-solid btn-block" type="submit">로그인</button>
+        <button className="btn btn-solid btn-block" type="submit" disabled={busy}>{busy ? "로그인 중..." : "로그인"}</button>
       </form>
 
       <div className="auth-links">

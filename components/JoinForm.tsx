@@ -38,8 +38,11 @@ export default function JoinForm() {
   const all = terms.every((t) => agree[t.key]);
   const toggleAll = (v: boolean) => setAgree(Object.fromEntries(terms.map((t) => [t.key, v])));
 
-  const submit = (e: React.FormEvent) => {
+  const [busy, setBusy] = useState(false);
+
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (busy) return;
     const er: Errors = {};
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email)) er.email = "올바른 이메일 형식이 아닙니다.";
     if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,}$/.test(f.password)) er.password = "영문, 숫자, 특수문자를 포함해 8자 이상 입력해 주세요.";
@@ -50,8 +53,10 @@ export default function JoinForm() {
     setErrors(er);
     if (Object.keys(er).length) return;
 
-    const r = signup({ ...f, marketing: !!agree.marketing });
-    if (!r.ok) return setErrors({ email: r.error });
+    setBusy(true);
+    const r = await signup({ ...f, marketing: !!agree.marketing });
+    setBusy(false);
+    if (!r.ok) return setErrors({ [r.error?.includes("이메일") ? "email" : "form"]: r.error });
     setDone(true);
   };
 
@@ -108,7 +113,8 @@ export default function JoinForm() {
           {errors.terms && <small className="form-error" role="alert">{errors.terms}</small>}
         </fieldset>
 
-        <button className="btn btn-solid btn-block" type="submit">가입하기</button>
+        {errors.form && <p className="form-error" role="alert">{errors.form}</p>}
+        <button className="btn btn-solid btn-block" type="submit" disabled={busy}>{busy ? "가입 중..." : "가입하기"}</button>
       </form>
       <div className="auth-links">
         <span>이미 회원이신가요?</span>

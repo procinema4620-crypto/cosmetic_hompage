@@ -38,6 +38,9 @@ export interface Member {
   marketing: boolean;
 }
 
+/** 브라우저로 내려주는 회원 정보 — 비밀번호는 절대 포함하지 않습니다. */
+export type PublicMember = Omit<Member, "password">;
+
 export const orderSteps: OrderStatus[] = ["결제완료", "배송준비", "배송중", "배송완료"];
 
 export const gradeBenefit: Record<Grade, { rate: string; note: string }> = {

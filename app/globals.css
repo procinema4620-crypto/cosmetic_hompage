@@ -121,6 +121,7 @@ button { font: inherit; color: inherit; cursor: pointer; background: none; borde
 .hero-cta .btn { height: 44px; padding: 0 24px; }
 .hero .btn-ghost { border-color: var(--green); color: var(--green); background: rgba(247, 243, 234, .7); }
 .hero .btn-ghost:hover { background: var(--green); color: #f7f3ea; }
+.hero-toggle.hero-sound { right: 68px; }
 .hero-toggle { position: absolute; right: 20px; bottom: 20px; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: rgba(247, 243, 234, .85); color: var(--green); }
 
 /* ───────── Member band ───────── */
@@ -501,6 +502,7 @@ button { font: inherit; color: inherit; cursor: pointer; background: none; borde
   .hero-stage::before { background: linear-gradient(0deg, rgba(247, 243, 234, .94) 0%, rgba(247, 243, 234, .7) 45%, rgba(247, 243, 234, 0) 78%); }
   .hero-copy { left: 16px; right: 16px; bottom: 32px; }
   .hero-toggle { top: 14px; bottom: auto; right: 14px; }
+  .hero-toggle.hero-sound { right: 62px; }
   .mb-in { flex-direction: column; align-items: flex-start; }
   .mb-stats { width: 100%; justify-content: space-between; }
   .mb-stats a { padding: 4px 10px; }

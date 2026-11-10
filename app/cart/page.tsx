@@ -20,9 +20,9 @@ export default function CartPage() {
 
   const shipping = items.length === 0 || total >= FREE_SHIPPING ? 0 : 3000;
 
-  const checkout = () => {
+  const checkout = async () => {
     if (!user) return router.push("/login?next=/cart");
-    const order = placeOrder(lines);
+    const order = await placeOrder(lines);
     if (!order) return;
     clear();
     router.push("/orders");

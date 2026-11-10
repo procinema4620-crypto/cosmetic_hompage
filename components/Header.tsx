@@ -78,7 +78,7 @@ export default function Header() {
               <>
                 <li className="util-hi"><Link href="/mypage"><b>{user.name}</b>님</Link></li>
                 <li className="util-my"><Link href="/mypage">마이페이지</Link></li>
-                <li><button onClick={() => { logout(); router.push("/"); }}>로그아웃</button></li>
+                <li><button onClick={async () => { await logout(); router.push("/"); }}>로그아웃</button></li>
               </>
             ) : (
               <>

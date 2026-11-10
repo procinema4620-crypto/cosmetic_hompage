@@ -52,11 +52,11 @@ function FindId({ onGoReset }: { onGoReset: () => void }) {
   const [result, setResult] = useState<string | null>(null);
   const [error, setError] = useState("");
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setResult(null);
     if (name.trim().length < 2 || !PHONE_RULE.test(phone)) return setError("이름과 휴대폰 번호를 정확히 입력해 주세요.");
-    const found = findEmail(name, phone);
+    const found = await findEmail(name, phone);
     if (!found) return setError("일치하는 회원 정보를 찾을 수 없어요.");
     setError("");
     setResult(found);
@@ -101,20 +101,20 @@ function ResetPw() {
   const [error, setError] = useState("");
   const [done, setDone] = useState(false);
 
-  const verify = (e: React.FormEvent) => {
+  const verify = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email)) return setError("올바른 이메일 형식이 아닙니다.");
     if (f.name.trim().length < 2 || !PHONE_RULE.test(f.phone)) return setError("이름과 휴대폰 번호를 정확히 입력해 주세요.");
-    if (!verifyMember(f.email, f.name, f.phone)) return setError("입력하신 정보와 일치하는 회원이 없어요.");
+    if (!(await verifyMember(f.email, f.name, f.phone))) return setError("입력하신 정보와 일치하는 회원이 없어요.");
     setError("");
     setVerified(true);
   };
 
-  const reset = (e: React.FormEvent) => {
+  const reset = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!PW_RULE.test(pw)) return setError("영문, 숫자, 특수문자를 포함해 8자 이상 입력해 주세요.");
     if (pw !== confirm) return setError("비밀번호가 일치하지 않습니다.");
-    const r = resetPassword(f.email, f.name, f.phone, pw);
+    const r = await resetPassword(f.email, f.name, f.phone, pw);
     if (!r.ok) return setError(r.error ?? "재설정에 실패했어요.");
     setError("");
     setDone(true);
